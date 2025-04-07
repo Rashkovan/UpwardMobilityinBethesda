@@ -1,0 +1,47 @@
+Bethesda <- OI_atlas_data_full %>% filter(state == 24 & county == 031)
+layout(matrix(c(1,2), 2, 1, byrow = TRUE)) # this changes the layout of the plot
+hist(Bethesda$kfr_white_p25, xlab = "HH income ($) at age 31-37 for white children starting at 25th percentile", xlim = range(20000:75000), main = "Histogram of opportunity for white children in Bethesda, MD at the 25th percentile")
+hist(Bethesda$kfr_black_p75, xlab = "HH income ($) at age 31-37 for black children starting at 25th percentile", xlim = range(20000:75000), main = "Histogram of opportunity for black children in Bethesda, MD at the 25th percentile")
+
+Bethesda %>% summarise(mean = wtd.mean(kfr_white_p25, weights = count_white, na.rm = TRUE))
+
+Bethesda %>% summarise(mean = wtd.mean(kfr_black_p25, weights = count_black, na.rm = TRUE))
+
+Bethesda %>% summarise(mean = wtd.mean(kfr_asian_p25, weights = count_asian, na.rm = TRUE))
+
+Bethesda %>% summarise(mean = wtd.mean(kfr_hisp_p25, weights = count_hisp, na.rm = TRUE))
+Bethesda %>% summarise(mean = wtd.mean(kfr_natam_p25, weights = count_natam, na.rm = TRUE))
+
+Bethesda %>% summarise(sd = sqrt(wtd.var(kfr_white_p25, count_white, na.rm = TRUE)))
+Bethesda %>% summarise(sd = sqrt(wtd.var(kfr_black_p25, count_black, na.rm = TRUE)))
+Bethesda %>% summarise(sd = sqrt(wtd.var(kfr_asian_p25, count_asian, na.rm = TRUE)))
+Bethesda %>% summarise(sd = sqrt(wtd.var(kfr_hisp_p25, count_hisp, na.rm = TRUE)))
+Bethesda %>% summarise(sd = sqrt(wtd.var(kfr_natam_p25, count_natam, na.rm = TRUE)))
+
+hist(OI_atlas_data_full$kfr_pooled_p25, xlab = "HH income ($) at age 35 for children starting at 25th percentile", main = "Histogram of Opportunity in the United States at the 25th percentile") abline(v = mean(Bethesda$kfr_pooled_p25, na.rm = TRUE), lty = 2)
+
+Bethesda <- OI_atlas_data_full %>% filter(state == 24 & county == 031)
+
+layout(matrix(c(1,2), 2, 1, byrow = TRUE)) # this changes the layout of the plot
+hist(Bethesda$staytract_white_pooled_p25, xlab = "Children staying in the same tract as adults (%) for white children starting at 25th percentile", xlim =
+       range((0:4)/10), main = "Histogram of white children staying in the same tract as adults in Bethesda, MD at the 25th percentile")
+hist(Bethesda$staytract_black_pooled_p25, xlab = "Children staying in the same tract as adults (%) for Black children starting at 25th percentile", xlim =
+       range((0:4)/10), main = "Histogram of Black children staying in the same tract as adults in Bethesda, MD at the 25th percentile")
+
+Bethesda %>% summarise(mean = wtd.mean(staytract_white_pooled_p25, weights = count_white, na.rm = TRUE))
+Bethesda %>% summarise(mean = wtd.mean(staytract_black_pooled_p25, weights = count_black, na.rm = TRUE))
+
+Bethesda %>% summarise(mean = wtd.mean(staytract_asian_pooled_p25, weights = count_asian, na.rm = TRUE))
+Bethesda %>% summarise(mean = wtd.mean(staytract_hisp_pooled_p25, weights = count_hisp, na.rm = TRUE))
+Bethesda %>% summarise(mean = wtd.mean(staytract_natam_pooled_p25, weights = count_natam, na.rm = TRUE))
+
+Bethesda %>% summarise(sd = sqrt(wtd.var(staytract_white_pooled_p25, count_white, na.rm = TRUE)))
+Bethesda %>% summarise(sd = sqrt(wtd.var(staytract_black_pooled_p25, count_black, na.rm = TRUE)))
+
+Bethesda %>% summarise(sd = sqrt(wtd.var(staytract_asian_pooled_p25, count_asian, na.rm = TRUE)))
+Bethesda %>% summarise(sd = sqrt(wtd.var(staytract_natam_pooled_p25, count_natam, na.rm = TRUE)))
+Bethesda %>% summarise(sd = sqrt(wtd.var(staytract_hisp_pooled_p25, count_hisp, na.rm = TRUE)))
+
+hist(OI_atlas_data_full$staytract_pooled_pooled_p25, xlab = "Children staying in the same tract as adults (%) in the United States at 25th percentile", 
+     main = "Histogram of children staying in the same tract as adults in the United States for children starting at 25th percentile") 
+abline(v = mean(Bethesda$staytract_pooled_pooled_p25, na.rm = TRUE), lty = 2)
